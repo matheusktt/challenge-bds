@@ -6,13 +6,13 @@ import java.util.List;
 public class ValidationError extends StandardError {
     private static final long seriaLVersionUID = 1L;
 
-    private List<FieldMessage> erros = new ArrayList<>();
+    private List<FieldMessage> errors = new ArrayList<>();
 
-    public List<FieldMessage> getErros() {
-        return erros;
+    public List<FieldMessage> getErrors() {
+        return errors;
     }
 
     public void addError(String fielName, String message) {
-        erros.add(new FieldMessage(fielName, message));
+        errors.add(new FieldMessage(fielName, message));
     }
 }
