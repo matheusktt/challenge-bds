@@ -25,11 +25,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     // Endpoint publico para login e h2-console
     private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
 
-    // Endpoints liberados para operador e admin
-    private static final String[] OPERATOR_OR_ADMIN = {"/products/**", "/categories/**"};
-
-    // Endpoint liberado para admin
-    private static final String[] ADMIN = {"/users/**"};
+    // Endpoints liberados para operador get
+    private static final String[] OPERATOR_GET = {"/departments/**", "/employees/**"};
 
     // Validação do token
     @Override
@@ -48,9 +45,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC).permitAll()
-                .antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN).permitAll()
-                .antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN")
-                .antMatchers(ADMIN).hasRole("ADMIN")
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.GET, OPERATOR_GET).hasAnyRole("OPERATOR", "ADMIN")
+                .anyRequest().hasAnyRole("ADMIN");
     }
 }
